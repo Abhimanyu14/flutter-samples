@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget/fancy_button.dart';
 
 void main() => runApp(const MyApp());
 
@@ -23,10 +24,17 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Flutter App'),
       ),
-      body: const Center(
-        child: Text(
-          'Hello World!',
-        ),
+      body: Container(),
+      floatingActionButton: FancyButton(
+        onPressed: () => _onPressed(context),
+      ),
+    );
+  }
+
+  void _onPressed(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Added to cart'),
       ),
     );
   }
