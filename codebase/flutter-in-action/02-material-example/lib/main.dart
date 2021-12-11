@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_example/my_home_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -7,23 +8,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Material Example',
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Material Example'),
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        buttonTheme: const ButtonThemeData(
+          textTheme: ButtonTextTheme.primary,
+        ),
       ),
-      body: Container(),
+      home: const MyHomePage(),
     );
   }
 }
