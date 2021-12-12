@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:key_time/my_home_page.dart';
+import 'package:key_time/positioned_tiles.dart';
 
 void main() => runApp(const MyApp());
 
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Key Time',
-      home: MyHomePage(),
+      home: PositionedTiles(),
     );
   }
 }

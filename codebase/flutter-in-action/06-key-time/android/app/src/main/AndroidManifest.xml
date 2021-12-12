@@ -3,7 +3,7 @@
 
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="key_time">
+        android:label="Key Time">
 
         <activity
             android:name=".MainActivity"
