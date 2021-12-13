@@ -1,3 +1,4 @@
+import 'package:custom_painting/my_painter.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -9,7 +10,18 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Custom Painting'),
       ),
-      body: Container(),
+      body: Center(
+        child: SizedBox(
+          height: 200.0,
+          width: 200.0,
+          child: Container(
+            child: CustomPaint(
+              painter: MyPainter(),
+            ),
+            color: Colors.greenAccent,
+          ),
+        ),
+      ),
     );
   }
 }
