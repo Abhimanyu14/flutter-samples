@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hackernews/src/article.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(const MyApp());
 
@@ -27,25 +29,55 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final List<Article> _articles = articles;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              'Hello',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await Future.delayed(const Duration(seconds: 1));
+          setState(() {
+            _articles.removeAt(0);
+          });
+        },
+        child: ListView(
+          children: _articles.map(_buildItem).toList(),
         ),
+      ),
+    );
+  }
+
+  Widget _buildItem(Article article) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ExpansionTile(
+        title: Text(
+          article.text,
+          style: const TextStyle(
+            fontSize: 24.0,
+          ),
+        ),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text('${article.commentsCount} comments'),
+              IconButton(
+                icon: const Icon(Icons.launch),
+                onPressed: () async {
+                  final fakeUrl = 'https://${article.domain}';
+                  if (await canLaunch(fakeUrl)) {
+                    launch(fakeUrl);
+                  }
+                },
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
